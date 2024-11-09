@@ -1,9 +1,6 @@
 package com.example.sd19304.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +16,8 @@ public class User {
 
     @Id
     @Column(name = "Id")
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @Column(name = "Password")
     private String password;
@@ -32,6 +30,13 @@ public class User {
 
     @Column(name = "Admin")
     private Boolean admin;
+
+    public User(String password, String fullname, String email, Boolean admin) {
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.admin = admin;
+    }
 
     @Override
     public String toString() {

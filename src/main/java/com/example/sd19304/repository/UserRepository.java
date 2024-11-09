@@ -20,10 +20,27 @@ public class UserRepository {
         return list;
     }
 
-    public void add(User user) {
+    public User getById(Integer id) {
+        User user = new User();
+        Session session = HibernateUtils.getFACTORY().openSession();
+        Query query = session.createQuery("select  u from User u where u.id = :idUser");
+        query.setParameter("idUser", id);
+        user = (User) query.getSingleResult();
+        return user;
+    }
+
+    public void saveOrUpdate(User user) {
         Session session = HibernateUtils.getFACTORY().openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(user);
+        session.saveOrUpdate(user);
+        transaction.commit();
+        session.close();
+    }
+
+    public void delete(User user) {
+        Session session = HibernateUtils.getFACTORY().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(user);
         transaction.commit();
         session.close();
     }

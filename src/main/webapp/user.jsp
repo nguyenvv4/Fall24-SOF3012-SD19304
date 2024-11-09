@@ -14,8 +14,6 @@
 </head>
 <body>
 <form action="/add" method="post">
-    <label>Id</label>
-    <input type="text" name="id"> <br>
     <label>Fullname</label>
     <input type="text" name="fullname"> <br>
     <label>Password</label>
@@ -46,6 +44,10 @@
             <td>${user.password}</td>
             <td>${user.email}</td>
             <td>${user.admin  == 'true' ? 'Quan ly': 'NhanVien'}</td>
+            <td>
+                <a href="/detail?id=${user.id}">detail</a>
+                <a href="/delete?id=${user.id}">delete</a>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
