@@ -1,5 +1,7 @@
 package com.example.sd19304.utils;
 
+import com.example.sd19304.model.DanhMuc;
+import com.example.sd19304.model.SanPham;
 import com.example.sd19304.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -31,6 +33,8 @@ public class HibernateUtils {
 
         conf.setProperties(properties);
         conf.addAnnotatedClass(User.class);
+        conf.addAnnotatedClass(DanhMuc.class);
+        conf.addAnnotatedClass(SanPham.class);
         ServiceRegistry registry = new StandardServiceRegistryBuilder()
                 .applySettings(conf.getProperties()).build();
         FACTORY = conf.buildSessionFactory(registry);
