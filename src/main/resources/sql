@@ -1,0 +1,75 @@
+
+
+CREATE TABLE Users (
+Id INT  NOT NULL IDENTITY ,
+Password nvarchar(50)  NOT NULL,
+Fullname nvarchar(50)  NOT NULL,
+Email nvarchar(50)  NOT NULL,
+Admin bit NOT NULL,
+CONSTRAINT PK__Users__3214EC0710283679 PRIMARY KEY (Id)
+);
+INSERT INTO Users (Password, Fullname, Email, Admin) VALUES
+('pass1234', 'Alice Johnson', 'alice.johnson@example.com', 0),
+('password', 'Bob Smith', 'bob.smith@example.com', 1),
+('secure123', 'Carol White', 'carol.white@example.com', 0),
+('mypassword', 'David Brown', 'david.brown@example.com', 1),
+('admin123', 'Eve Black', 'eve.black@example.com', 1),
+('guestpass', 'Frank Green', 'frank.green@example.com', 0),
+('user2024', 'Grace Moore', 'grace.moore@example.com', 0),
+('strongpass', 'Henry King', 'henry.king@example.com', 1),
+('letmein', 'Isla Walker', 'isla.walker@example.com', 0),
+('adminpass', 'Jack Harris', 'jack.harris@example.com', 1);
+CREATE TABLE danh_muc (
+                                    id int IDENTITY(1,1) NOT NULL,
+                                    ma_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    ten_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    ngay_tao datetime NULL,
+                                    CONSTRAINT PK__danh_muc__3213E83F8329A6CC PRIMARY KEY (id)
+);
+
+CREATE TABLE san_pham (
+                                    id int IDENTITY(1,1) NOT NULL,
+                                    ma_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    ten_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+                                    ngay_tao datetime NULL,
+                                    id_danh_muc int NULL,
+                                    CONSTRAINT PK__san_pham__3213E83F7AFEBDE1 PRIMARY KEY (id),
+                                    CONSTRAINT fk_san_pham_danh_muc FOREIGN KEY (id_danh_muc) REFERENCES danh_muc(id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+select * from danh_muc
+
+INSERT INTO danh_muc (ma_danh_muc, ten_danh_muc, trang_thai, ngay_tao) VALUES
+('DM_001', 'Danh Muc 1', 'active', '2024-01-01'),
+('DM_002', 'Danh Muc 2', 'inactive', '2024-02-01'),
+('DM_003', 'Danh Muc 3', 'active', '2024-03-01'),
+('DM_004', 'Danh Muc 4', 'inactive', '2024-04-01'),
+('DM_005', 'Danh Muc 5', 'active', '2024-05-01'),
+('DM_006', 'Danh Muc 6', 'inactive', '2024-06-01'),
+('DM_007', 'Danh Muc 7', 'active', '2024-07-01'),
+('DM_008', 'Danh Muc 8', 'inactive', '2024-08-01'),
+('DM_009', 'Danh Muc 9', 'active', '2024-09-01'),
+('DM_010', 'Danh Muc 10', 'inactive', '2024-10-01');
+
+INSERT INTO san_pham (ma_san_pham, ten_san_pham, trang_thai, ngay_tao, id_danh_muc) VALUES
+('SP_001', 'San Pham 1', 'available', '2024-01-15', 1),
+('SP_002', 'San Pham 2', 'out of stock', '2024-01-20', 1),
+('SP_003', 'San Pham 3', 'available', '2024-02-15', 2),
+('SP_004', 'San Pham 4', 'out of stock', '2024-02-20', 2),
+('SP_005', 'San Pham 5', 'available', '2024-03-15', 3),
+('SP_006', 'San Pham 6', 'out of stock', '2024-03-20', 3),
+('SP_007', 'San Pham 7', 'available', '2024-04-15', 4),
+('SP_008', 'San Pham 8', 'out of stock', '2024-04-20', 4),
+('SP_009', 'San Pham 9', 'available', '2024-05-15', 5),
+('SP_010', 'San Pham 10', 'out of stock', '2024-05-20', 5),
+('SP_011', 'San Pham 11', 'available', '2024-06-15', 6),
+('SP_012', 'San Pham 12', 'out of stock', '2024-06-20', 6),
+('SP_013', 'San Pham 13', 'available', '2024-07-15', 7),
+('SP_014', 'San Pham 14', 'out of stock', '2024-07-20', 7),
+('SP_015', 'San Pham 15', 'available', '2024-08-15', 8),
+('SP_016', 'San Pham 16', 'out of stock', '2024-08-20', 8),
+('SP_017', 'San Pham 17', 'available', '2024-09-15', 9),
+('SP_018', 'San Pham 18', 'out of stock', '2024-09-20', 9),
+('SP_019', 'San Pham 19', 'available', '2024-10-15', 10),
+('SP_020', 'San Pham 20', 'out of stock', '2024-10-20', 10);
