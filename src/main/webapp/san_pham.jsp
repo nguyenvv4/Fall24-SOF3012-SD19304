@@ -14,6 +14,23 @@
 </head>
 <body>
 
+<form action="/san-pham/add" method="post">
+    <label>ma san pham</label>
+    <input type="text" name="maSanPham"> <br>
+    <label>ten san pham</label>
+    <input type="text" name="tenSanPham"> <br>
+    <label>tran thai</label>
+    <input type="radio" name="trangThai" value="Active">Active
+    <input type="radio" name="trangThai" value="InActive">InActive<br>
+    <label>Danh muc</label>
+    <select name="danhMuc" id="">
+        <c:forEach items="${listDm}" var="d">
+            <option value="${d.id}">${d.tenDanhMuc}</option>
+        </c:forEach>
+    </select>
+    <br>
+    <button type="submit">Add</button>
+</form>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -21,6 +38,7 @@
         <td>ma san pham</td>
         <td>ten san pham</td>
         <td>trang thai</td>
+        <td>id danh muc</td>
         <td>ten danh muc</td>
         <td>ngay tao</td>
     </tr>
@@ -32,6 +50,7 @@
             <td>${sp.maSanPham}</td>
             <td>${sp.tenSanPham}</td>
             <td>${sp.trangThai}</td>
+            <td>${sp.danhMuc.id}</td>
             <td>${sp.danhMuc.tenDanhMuc}</td>
             <td>${sp.ngayTao}</td>
                 <%--            <td>--%>

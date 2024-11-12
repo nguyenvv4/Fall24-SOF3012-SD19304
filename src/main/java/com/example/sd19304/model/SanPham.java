@@ -37,4 +37,11 @@ public class SanPham {
     @JoinColumn(name = "id_danh_muc")
     private DanhMuc danhMuc;
 
+    public SanPham(String maSanPham, String tenSanPham, String trangThai, Date ngayTao, DanhMuc danhMuc) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.trangThai = trangThai;
+        this.ngayTao = ngayTao;
+        this.danhMuc = danhMuc;
+    }
 }

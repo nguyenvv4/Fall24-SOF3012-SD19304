@@ -3,10 +3,10 @@ package com.example.sd19304.repository;
 import com.example.sd19304.model.SanPham;
 import com.example.sd19304.model.SanPhamDto;
 import com.example.sd19304.model.User;
-import com.example.sd19304.servlet.SanPhamServlet;
 import com.example.sd19304.utils.HibernateUtils;
 import jakarta.persistence.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +36,14 @@ public class SanPhamRepository {
         list = query.getResultList();
         session.close();
         return list;
+    }
+
+    public void saveOrUpdate(SanPham sanPham) {
+        Session session = HibernateUtils.getFACTORY().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.saveOrUpdate(sanPham);
+        transaction.commit();
+        session.close();
     }
 
     public static void main(String[] args) {

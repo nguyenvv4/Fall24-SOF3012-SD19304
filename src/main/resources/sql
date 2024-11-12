@@ -20,23 +20,23 @@ INSERT INTO Users (Password, Fullname, Email, Admin) VALUES
 ('letmein', 'Isla Walker', 'isla.walker@example.com', 0),
 ('adminpass', 'Jack Harris', 'jack.harris@example.com', 1);
 CREATE TABLE danh_muc (
-                                    id int IDENTITY(1,1) NOT NULL,
-                                    ma_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    ten_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    ngay_tao datetime NULL,
-                                    CONSTRAINT PK__danh_muc__3213E83F8329A6CC PRIMARY KEY (id)
+id int IDENTITY(1,1) NOT NULL,
+ma_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ten_danh_muc varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ngay_tao datetime NULL,
+CONSTRAINT PK__danh_muc__3213E83F8329A6CC PRIMARY KEY (id)
 );
 
 CREATE TABLE san_pham (
-                                    id int IDENTITY(1,1) NOT NULL,
-                                    ma_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    ten_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
-                                    ngay_tao datetime NULL,
-                                    id_danh_muc int NULL,
-                                    CONSTRAINT PK__san_pham__3213E83F7AFEBDE1 PRIMARY KEY (id),
-                                    CONSTRAINT fk_san_pham_danh_muc FOREIGN KEY (id_danh_muc) REFERENCES danh_muc(id) ON DELETE CASCADE ON UPDATE CASCADE
+id int IDENTITY(1,1) NOT NULL,
+ma_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ten_san_pham varchar(255) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+trang_thai varchar(50) COLLATE SQL_Latin1_General_CP1_CI_AS NULL,
+ngay_tao datetime NULL,
+id_danh_muc int NULL,
+CONSTRAINT PK__san_pham__3213E83F7AFEBDE1 PRIMARY KEY (id),
+CONSTRAINT fk_san_pham_danh_muc FOREIGN KEY (id_danh_muc) REFERENCES danh_muc(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 select * from danh_muc
 
