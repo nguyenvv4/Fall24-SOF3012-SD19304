@@ -11,6 +11,19 @@
 <html>
 <head>
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function handlerClick(){
+            $.ajax({
+                url:"/api/ajax",
+                method:"GET",
+                dataType:"json",
+                success: function (response){
+                    console.log(response)
+                }
+            })
+        }
+    </script>
 </head>
 <body>
 
@@ -61,5 +74,7 @@
     </c:forEach>
     </tbody>
 </table>
+
+<button onclick="handlerClick()">Click me</button>
 </body>
 </html>
