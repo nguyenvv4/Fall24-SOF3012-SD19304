@@ -53,10 +53,10 @@
             <td>${sp.danhMuc.id}</td>
             <td>${sp.danhMuc.tenDanhMuc}</td>
             <td>${sp.ngayTao}</td>
-                <%--            <td>--%>
-                <%--                <a href="/detail?id=${user.id}">detail</a>--%>
-                <%--                <a href="/delete?id=${user.id}">delete</a>--%>
-                <%--            </td>--%>
+             <td>
+                 <a href="/san-pham/chi-tiet?id=${sp.id}">Chi tiet</a>
+                 <a href="/san-pham/delete?id=${sp.id}">delete</a>
+             </td>
         </tr>
     </c:forEach>
     </tbody>

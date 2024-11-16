@@ -14,7 +14,10 @@ import java.util.List;
 
 @WebServlet(name = "SanPhamServlet", value = {"/SanPhamServlet",
         "/san-pham/hien-thi",
-        "/san-pham/add"
+        "/san-pham/add",
+        "/san-pham/chi-tiet",
+        "/san-pham/delete",
+        "/san-pham/update",
 })
 public class SanPhamServlet extends HttpServlet {
     SanPhamRepository sanPhamRepository = new SanPhamRepository();
@@ -31,6 +34,18 @@ public class SanPhamServlet extends HttpServlet {
             request.setAttribute("list", list);
             request.setAttribute("listDm", listDm);
             request.getRequestDispatcher("/san_pham.jsp").forward(request, response);
+        } else if (uri.contains("/chi-tiet")) {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            SanPham sanPham = sanPhamRepository.getDetail(id);
+            request.setAttribute("sanPham", sanPham);
+            List<DanhMuc> listDm = danhMucRepo.getList();
+            request.setAttribute("listDm", listDm);
+            request.getRequestDispatcher("/chi-tiet.jsp").forward(request, response);
+        } else if (uri.contains("/delete")) {
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            SanPham sanPham = sanPhamRepository.getDetail(id);
+            sanPhamRepository.delete(sanPham);
+            response.sendRedirect("/san-pham/hien-thi");
         }
     }
 
@@ -52,6 +67,17 @@ public class SanPhamServlet extends HttpServlet {
             SanPham sanPham = new SanPham(maSanPham, tenSanPham, trangThai, new Date(), danhMuc);
             sanPhamRepository.saveOrUpdate(sanPham);
             response.sendRedirect("/san-pham/hien-thi");
+        } else if (uri.contains("/update")) {// truyen them id cho san pham
+            Integer id = Integer.parseInt(request.getParameter("id"));
+            String maSanPham = request.getParameter("maSanPham");
+            String tenSanPham = request.getParameter("tenSanPham");
+            String trangThai = request.getParameter("trangThai");
+            Integer idDanhMuc = Integer.parseInt(request.getParameter("danhMuc"));
+            DanhMuc danhMuc = danhMucRepo.getById(idDanhMuc);
+            SanPham sanPham = new SanPham(id,maSanPham, tenSanPham, trangThai, new Date(), danhMuc);
+            sanPhamRepository.saveOrUpdate(sanPham);
+            response.sendRedirect("/san-pham/hien-thi");
+
         }
     }
 }

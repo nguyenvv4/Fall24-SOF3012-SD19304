@@ -23,6 +23,15 @@ public class SanPhamRepository {
         return list;
     }
 
+    public SanPham getDetail(Integer id) {
+        Session session = HibernateUtils.getFACTORY().openSession();
+        Query query = session.createQuery("select s from SanPham s where s.id = :idSp");
+        query.setParameter("idSp", id);
+        SanPham sanPham = (SanPham) query.getSingleResult();
+        session.close();
+        return sanPham;
+    }
+
     // su dung Dto
     public List<SanPhamDto> getList() {
         List<SanPhamDto> list = new ArrayList<>();
@@ -42,6 +51,14 @@ public class SanPhamRepository {
         Session session = HibernateUtils.getFACTORY().openSession();
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(sanPham);
+        transaction.commit();
+        session.close();
+    }
+
+    public void delete(SanPham sanPham) {
+        Session session = HibernateUtils.getFACTORY().openSession();
+        Transaction transaction = session.beginTransaction();
+        session.delete(sanPham);
         transaction.commit();
         session.close();
     }
