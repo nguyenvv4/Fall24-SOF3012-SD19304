@@ -13,13 +13,14 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        function handlerClick(){
+        function handlerClick(id) {
             $.ajax({
-                url:"/api/ajax",
-                method:"GET",
-                dataType:"json",
-                success: function (response){
+                url: "/api/ajax?id=" + id,
+                method: "GET",
+                dataType: "json",
+                success: function (response) {
                     console.log(response)
+                    document.getElementById("sanPham").innerHTML = response.id
                 }
             })
         }
@@ -66,15 +67,15 @@
             <td>${sp.danhMuc.id}</td>
             <td>${sp.danhMuc.tenDanhMuc}</td>
             <td>${sp.ngayTao}</td>
-             <td>
-                 <a href="/san-pham/chi-tiet?id=${sp.id}">Chi tiet</a>
-                 <a href="/san-pham/delete?id=${sp.id}">delete</a>
-             </td>
+            <td>
+                <a href="/san-pham/chi-tiet?id=${sp.id}">Chi tiet</a>
+                <a href="/san-pham/delete?id=${sp.id}">delete</a>
+                <button onclick="handlerClick(${sp.id})">Click</button>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
-<button onclick="handlerClick()">Click me</button>
+<h1 id="sanPham"></h1>
 </body>
 </html>
