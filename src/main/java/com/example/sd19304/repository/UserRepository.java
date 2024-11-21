@@ -45,4 +45,19 @@ public class UserRepository {
         session.close();
     }
 
+    public User getByEmail(String email) {
+        User user = new User();
+        try {
+            Session session = HibernateUtils.getFACTORY().openSession();
+            Query query = session.createQuery("select  u from User u where u.email = :emailUser");
+            query.setParameter("emailUser", email);
+            user = (User) query.getSingleResult();
+            return user;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

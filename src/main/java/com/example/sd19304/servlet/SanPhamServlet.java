@@ -2,11 +2,13 @@ package com.example.sd19304.servlet;
 
 import com.example.sd19304.model.DanhMuc;
 import com.example.sd19304.model.SanPham;
+import com.example.sd19304.model.User;
 import com.example.sd19304.repository.DanhMucRepo;
 import com.example.sd19304.repository.SanPhamRepository;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.hibernate.Session;
 
 import java.io.IOException;
 import java.util.Date;
@@ -33,6 +35,9 @@ public class SanPhamServlet extends HttpServlet {
             List<DanhMuc> listDm = danhMucRepo.getList();
             request.setAttribute("list", list);
             request.setAttribute("listDm", listDm);
+            HttpSession session = request.getSession();
+            User user = (User) session.getAttribute("user");
+            System.out.println(user);
             request.getRequestDispatcher("/san_pham.jsp").forward(request, response);
         } else if (uri.contains("/chi-tiet")) {
             Integer id = Integer.parseInt(request.getParameter("id"));
